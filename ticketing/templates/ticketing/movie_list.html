@@ -1,0 +1,36 @@
+{% extends "ticketing/base.html" %}
+{% load static %}
+
+{% block title %}
+    فهرست فیلم‌ها
+{% endblock %}
+
+{% block toolbar_title %}
+    فهرست فیلم‌ها
+{% endblock %}
+
+{% block main_content %}
+    <div class="row">
+        <div class="col py-3">
+            {% if movies %}
+                <ul class="item-list">
+                    {% for movie in movies %}
+                        <li>
+                            <a href="{% url 'ticketing:movie_detail' movie.id %}">
+                                <i class="fas fa-film"></i>
+                                {{ movie }}
+                                <small class="text-muted">
+                                    ({{ movie.director }})
+                                </small>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="alert alert-danger">
+                    در حال حاضر هیچ فیلمی برای نمایش وجود ندارد.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
